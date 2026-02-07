@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Quick Question...</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background-color: #fff0f3;
+            margin: 0;
+            overflow: hidden; /* Prevents scrollbars if the button moves near edges */
+        }
+
+        h1 { color: #ff4d6d; margin-bottom: 30px; }
+
+        .button-group {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 50px;
+            transition: all 0.1s ease; /* Makes the movement snappy but visible */
+            z-index: 10;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            position: relative; /* Starts in the normal flow */
+        }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Will you be my Valentine? 🌹</h1>
+
+    <div class="button-group">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn" onclick="alert('Wrong button! Try the other one 😉')">No</button>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        let hoverCount = 0;
+
+        yesBtn.addEventListener('mouseover', () => {
+            if (hoverCount < 10) {
+                // Get button dimensions
+                const btnWidth = yesBtn.offsetWidth;
+                const btnHeight = yesBtn.offsetHeight;
+
+                // Calculate random positions within the visible window
+                // Subtracting 100px padding to keep it away from the extreme edges
+                const newX = Math.random() * (window.innerWidth - btnWidth - 100) + 50;
+                const newY = Math.random() * (window.innerHeight - btnHeight - 100) + 50;
+
+                // Apply movement
+                yesBtn.style.position = 'fixed'; 
+                yesBtn.style.left = newX + 'px';
+                yesBtn.style.top = newY + 'px';
+                
+                hoverCount++;
+            }
+        });
+
+        yesBtn.addEventListener('click', () => {
+            alert('Bet you are my valentine! ❤️');
+        });
+    </script>
+
+</body>
+</html>
